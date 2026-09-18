@@ -30,6 +30,7 @@ public class Main {
                 System.out.print("Enter your Username(must contain'_' and max of 5 chars)");
                 username = scanner.nextLine();
                 
+                // password 
                 System.out.print("Please enter password");
                 password = scanner.nextLine();
                 
