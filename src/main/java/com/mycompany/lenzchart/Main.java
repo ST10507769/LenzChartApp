@@ -24,6 +24,7 @@ public class Main {
             lastName = scanner.nextLine();
             String username, password, cellPhone;
             String registrationMessage;
+            //While loop
             while (true){
                 System.out.print("Enter your Username(must contain'_' and max of 5 chars)");
                 username = scanner.nextLine();
