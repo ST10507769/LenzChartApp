@@ -11,6 +11,7 @@ public class Main {
     public static void main(String[] args){
         try (Scanner scanner = new Scanner(System.in)) {
             Login loginSystem = new Login();
+            // System output
             System.out.println("=========================");
             System.out.println("  Welcome to Lenz Chart  ");
             System.out.println("=========================");
