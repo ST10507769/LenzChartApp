@@ -19,6 +19,7 @@ public class Main {
             System.out.print("Enter first name");
             String firstName =scanner.nextLine();
             System.out.print("Enter last name");
+            //Declaration
             String lastName;
             lastName = scanner.nextLine();
             String username, password, cellPhone;
