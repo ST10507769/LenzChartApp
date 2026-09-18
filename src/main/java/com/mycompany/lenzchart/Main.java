@@ -26,6 +26,7 @@ public class Main {
             String registrationMessage;
             //While loop
             while (true){
+                // user name 
                 System.out.print("Enter your Username(must contain'_' and max of 5 chars)");
                 username = scanner.nextLine();
                 
