@@ -2,67 +2,67 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.lenzchart;
+package com.mycompany.lenzchart; 
 
 public class Login {
     private String storedUsername;
     private String storedPassword;
+    private String storedCellPhone;
     private String firstName;
     private String lastName;
-    
-    public boolean checkUserName(String username){
-        // must contain an underscore and no more than 5 charecters
-        return username.contains("_")&& username.length()<=5;
+
+    public boolean checkUserName(String username) {
+        return username.contains("_") && username.length() <= 5;
     }
-    
-    public boolean checkPasswordComplexity(String password){
-        // The password must at least have 8 chars, 1 capital, 1 number, 1 special character
-        String regex ="^(?=.*[A-Z])(?=.[0-9])(?=.*[^a-zA-Z0-9]).{8,}$";
-        return password.matches(regex);
+
+    public boolean checkPasswordComplexity(String password) {
+        if (password == null || password.length() < 8) return false;
+        boolean hasUpper = false;
+        boolean hasDigit = false;
+        boolean hasSpecial = false;
+        for (int i = 0; i < password.length(); i++) {
+            char c = password.charAt(i);
+            if (java.lang.Character.isUpperCase(c)) hasUpper = true;
+            else if (java.lang.Character.isDigit(c)) hasDigit = true;
+            else if (!java.lang.Character.isLetterOrDigit(c)) hasSpecial = true;
+        }
+        return hasUpper && hasDigit && hasSpecial;
     }
-    
-    public boolean checkCellPhoneNumber(String cellPhone){
-        //The number mus contai +27 and being followed by 9 digits to show that you are south african
-        String regex = "^\\+27[0-9]{9}$";
+
+    public boolean checkCellPhoneNumber(String cellPhone) {
+        String regex = "^(\\+27|0)[0-9]{9,10}$";
         return cellPhone.matches(regex);
-        
     }
-    
-    public String registerUser(String username, String password, String cellPhoe, String firstName, String lastName){
-        if (checkUserName(username)){
-            return "Username is not correctly written; plase make sure that your username contains an underscore and not more than 5 characters.";
-            
+
+    public String registerUser(String username, String password, String cellPhone, String firstName, String lastName) {
+        if (!checkUserName(username)) {
+            return "Username is incorrectly formatted, please make sure that your username contains an underscore and is no more than five characters in length.";
         }
-        if (checkPasswordComplexity(password)){
-            return "Password is not correctly written, plase make sure that your password contains at least 8 charecters, a capital letter, a number, and a special cahrecter. ";
+        if (!checkPasswordComplexity(password)) {
+            return "Password is incorrectly formatted, please make sure that your password contains at least 8 characters, a capital letter, a number, and a special character.";
         }
-        String cellPhone = null;
-        if (checkCellPhoneNumber(cellPhone)){
-            return "Cell phone number is incorrect or it does not contain the south african code";
+        if (!checkCellPhoneNumber(cellPhone)) {
+            return "Cell phone number is incorrectly formatted, please make sure that your cell phone number contains an international code.";
         }
-        
-        //If all the the information passes, store the details
+
         this.storedUsername = username;
         this.storedPassword = password;
+        this.storedCellPhone = cellPhone;
         this.firstName = firstName;
         this.lastName = lastName;
-        
-        return "Username successful.Password successful.Cell phone number successful.User registered successfully";
-        
+
+        return "Username successfully captured.\nPassword successfully captured.\nCell phone number successfully added.\nUser registered successfully.";
     }
-    
-    public boolean loginUser(String username, String password){
+
+    public boolean loginUser(String username, String password) {
         return username.equals(this.storedUsername) && password.equals(this.storedPassword);
-        
     }
-    
-    public String returnLoginStatus(boolean loginStatus){
-        if (loginStatus){
-            return "Welcome" + firstName + lastName + "it is nice to have you again.";
-            
-        } else{
-            return "Username or Password incorrect, please try again in 10 years";
+
+    public String returnLoginStatus(boolean loginStatus) {
+        if (loginStatus) {
+            return "Welcome " + firstName + ", " + lastName + " it is great to see you again.";
+        } else {
+            return "Username or password incorrect, please try again.";
         }
     }
-    
 }
